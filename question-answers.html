@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="ta">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>திருவாசகம் - கேள்வி பதில்கள்</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Noto Sans Tamil', 'Latha', 'Times New Roman', serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+        
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+        
+        .header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+        
+        .content {
+            padding: 40px;
+        }
+        
+        .qa-item {
+            margin-bottom: 30px;
+            border-left: 4px solid #667eea;
+            padding-left: 25px;
+            background: #f8f9fa;
+            border-radius: 8px;
+            padding: 20px 20px 20px 25px;
+            transition: all 0.3s ease;
+        }
+        
+        .qa-item:hover {
+            transform: translateX(5px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            border-left-color: #2a5298;
+        }
+        
+        .question {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: flex-start;
+        }
+        
+        .question::before {
+            content: "❓";
+            margin-right: 10px;
+            font-size: 1.1rem;
+        }
+        
+        .answer {
+            font-size: 1.1rem;
+            color: #34495e;
+            background: white;
+            padding: 15px;
+            border-radius: 6px;
+            border-left: 3px solid #27ae60;
+            display: flex;
+            align-items: flex-start;
+        }
+        
+        .answer::before {
+            content: "✅";
+            margin-right: 10px;
+            font-size: 1rem;
+        }
+        
+        .stats {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+        
+        .stat {
+            text-align: center;
+            padding: 15px 25px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-radius: 10px;
+            min-width: 120px;
+        }
+        
+        .stat-number {
+            font-size: 2rem;
+            font-weight: bold;
+            display: block;
+        }
+        
+        .stat-label {
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+        
+        .subject-info {
+            background: #e8f4f8;
+            border: 1px solid #bee5eb;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 30px;
+        }
+        
+        .subject-info h3 {
+            color: #0c5460;
+            margin-bottom: 10px;
+            font-size: 1.3rem;
+        }
+        
+        .subject-info p {
+            color: #0c5460;
+            font-size: 1rem;
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                margin: 10px;
+                border-radius: 10px;
+            }
+            
+            .header {
+                padding: 20px;
+            }
+            
+            .header h1 {
+                font-size: 2rem;
+            }
+            
+            .content {
+                padding: 20px;
+            }
+            
+            .qa-item {
+                padding: 15px 15px 15px 20px;
+            }
+            
+            .stats {
+                gap: 15px;
+            }
+            
+            .stat {
+                padding: 10px 15px;
+                min-width: 100px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>திருவாசகம்</h1>
+            <p>போற்றித் திருஅகவல் - கேள்வி பதில்கள்</p>
+        </div>
+        
+        <div class="content">
+            <div class="subject-info">
+                <h3>📚 நூல் அறிமுகம்</h3>
+                <p>திருவாசகம் சைவ சமயத்தின் கருவூலம் என்று போற்றப்படும் ஒரு புனித நூலாகும். இதனைத் தொகுத்தவர் ஆத்ரேய கோத்ரர் என்பவராவர். இந்நூலில் மொத்தம் 135 பாடல்கள் உள்ளன.</p>
+            </div>
+            
+            <div class="stats">
+                <div class="stat">
+                    <span class="stat-number">10</span>
+                    <span class="stat-label">கேள்விகள்</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-number">135</span>
+                    <span class="stat-label">பாடல்கள்</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-number">1</span>
+                    <span class="stat-label">நூல்</span>
+                </div>
+            </div>
+            
+            <div id="qa-container">
+                <!-- Q&A content will be inserted here -->
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Tamil Q&A data with fixed JSON syntax
+        const qaData = [
+            {
+                "f": "பாடப்பகுதியில் கொடுக்கப்பட்டுள்ள கவிதையின் தலைப்பு என்ன?",
+                "b": "போற்றித் திருஅகவல்."
+            },
+            {
+                "f": "'போற்றித் திருஅகவல்' என்னும் பகுதி இடம்பெற்றுள்ள நூல் எது?",
+                "b": "திருவாசகம்."
+            },
+            {
+                "f": "சைவ சமயத்தின் கருவூலம் என்று குறிப்பிடப்படும் நூல் எது?",
+                "b": "திருவாசகம்."
+            },
+            {
+                "f": "பாடப்பகுதியில் குறிப்பிடப்பட்டுள்ள திருவாசக நூலில் உள்ள மொத்தப் பாடல்களின் எண்ணிக்கை எவ்வளவு?",
+                "b": "135 பாடல்கள்."
+            },
+            {
+                "f": "பாடப்பகுதியின்படி, திருவாசக நூலைத் தொகுத்தவராகக் குறிப்பிடப்படுபவர் யார்?",
+                "b": "ஆத்ரேய கோத்ரர்."
+            },
+            {
+                "f": "உபநிடதப் பொருளுணர்வும் உரைபெறும் மந்திரங்களும் - இத்தொடர் எவற்றின் பொருளை உணர்வதைக் குறிக்கிறது?",
+                "b": "உபநிடதங்கள் மற்றும் மந்திரங்களின் பொருளை உணர்வதைக் குறிக்கிறது."
+            },
+            {
+                "f": "செப்பரிய திருஅருளைச் செப்புவதும் செய்குவதும் - இத்தொடரில் 'செப்பரிய திருஅருள்' என்பது யாருடைய அருளைக் குறிக்கிறது?",
+                "b": "சிவபெருமானின் சொல்வதற்கு அரிய திருவருளைக் குறிக்கிறது."
+            },
+            {
+                "f": "தப்பரிய சிவன்பதத்தில் தங்குவதும் சாத்தியமோ! - இவ்வரியில் கவிஞர் எதை அடைவது சாத்தியமா எனக் கேட்கிறார்?",
+                "b": "தவறாமல் சிவபெருமானின் திருவடியை அடைந்து அங்கே தங்குவது சாத்தியமா எனக் கேட்கிறார்."
+            },
+            {
+                "f": "_____ சைவ சமயக் கருவூல் எனப் போற்றப்படுகிறது.",
+                "b": "திருவாசகம்"
+            },
+            {
+                "f": "பாடப்பகுதியில் உள்ள திருவாசகப் பாடலின் தலைப்பு _____ ஆகும்.",
+                "b": "போற்றித் திருஅகவல்"
+            }
+        ];
+
+        // Function to render Q&A items
+        function renderQA() {
+            const container = document.getElementById('qa-container');
+            
+            qaData.forEach((item, index) => {
+                const qaItem = document.createElement('div');
+                qaItem.className = 'qa-item';
+                qaItem.innerHTML = `
+                    <div class="question">
+                        <span><strong>கேள்வி ${index + 1}:</strong> ${item.f}</span>
+                    </div>
+                    <div class="answer">
+                        <span><strong>பதில்:</strong> ${item.b}</span>
+                    </div>
+                `;
+                container.appendChild(qaItem);
+            });
+        }
+
+        // Load fonts and render content
+        document.addEventListener('DOMContentLoaded', function() {
+            // Add Google Fonts for better Tamil rendering
+            const link = document.createElement('link');
+            link.href = 'https://fonts.googleapis.com/css2?family=Noto+Sans+Tamil:wght@400;600;700&display=swap';
+            link.rel = 'stylesheet';
+            document.head.appendChild(link);
+            
+            renderQA();
+        });
+
+        // Console log to confirm successful loading
+        console.log('திருவாசகம் Q&A page loaded successfully!');
+        console.log(`Total questions loaded: ${qaData.length}`);
+    </script>
+</body>
+</html>

@@ -1,0 +1,1000 @@
+/* Mobile-specific improvements for the login page */
+
+/* Import Tamil fonts */
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Tamil:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
+/* Floating Animation for Educational Elements */
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px) rotate(0deg);
+    opacity: 0.1;
+  }
+  25% {
+    transform: translateY(-20px) rotate(2deg);
+    opacity: 0.3;
+  }
+  50% {
+    transform: translateY(-40px) rotate(0deg);
+    opacity: 0.2;
+  }
+  75% {
+    transform: translateY(-20px) rotate(-2deg);
+    opacity: 0.3;
+  }
+}
+
+@keyframes gentleFloat {
+  0%, 100% {
+    transform: translateY(0px) translateX(0px) scale(1);
+    opacity: 0.1;
+  }
+  33% {
+    transform: translateY(-30px) translateX(10px) scale(1.1);
+    opacity: 0.2;
+  }
+  66% {
+    transform: translateY(-15px) translateX(-5px) scale(0.9);
+    opacity: 0.15;
+  }
+}
+
+@keyframes fadeInScale {
+  0% {
+    opacity: 0;
+    transform: scale(0.8) translateY(20px);
+  }
+  50% {
+    opacity: 0.3;
+    transform: scale(1.1) translateY(-10px);
+  }
+  100% {
+    opacity: 0.1;
+    transform: scale(1) translateY(0px);
+  }
+}
+
+@keyframes buttonGlow {
+  0%, 100% {
+    box-shadow: 0 0 20px rgba(59, 130, 246, 0.3);
+  }
+  50% {
+    box-shadow: 0 0 30px rgba(59, 130, 246, 0.6);
+  }
+}
+
+@keyframes pulseGradient {
+  0%, 100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+/* Enhanced Button Animations */
+.enhanced-button {
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.enhanced-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px rgba(59, 130, 246, 0.3);
+}
+
+.enhanced-button:active {
+  transform: translateY(0px) scale(0.98);
+  transition: all 0.1s ease;
+}
+
+.enhanced-button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: left 0.5s;
+}
+
+.enhanced-button:hover::before {
+  left: 100%;
+}
+
+/* Floating elements */
+.animate-float {
+  animation: gentleFloat 15s ease-in-out infinite;
+}
+
+.animate-float-delayed {
+  animation: gentleFloat 18s ease-in-out infinite 5s;
+}
+
+.animate-float-slow {
+  animation: gentleFloat 20s ease-in-out infinite 10s;
+}
+
+/* Global mobile optimizations */
+@media (max-width: 768px) {
+  /* Prevent zoom on input focus in iOS */
+  input[type="text"],
+  input[type="password"],
+  input[type="email"],
+  textarea,
+  select {
+    font-size: 16px !important;
+  }
+
+  /* Improve touch targets */
+  button,
+  input,
+  textarea {
+    min-height: 44px;
+  }
+
+  /* Better spacing for mobile */
+  .mobile-padding {
+    padding: 1rem;
+  }
+
+  /* Tamil font optimization */
+  [lang="ta"],
+  .tamil-text {
+    font-family: 'Noto Sans Tamil', 'Kailasa', 'Latha', sans-serif;
+    line-height: 1.6;
+    letter-spacing: 0.02em;
+  }
+
+  /* Reduce floating elements on mobile for performance */
+  .animate-float {
+    animation-duration: 20s;
+  }
+
+  /* Mobile sidebar improvements */
+  .mobile-sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    z-index: 50;
+    transform: translateX(-100%);
+    transition: transform 0.3s ease-in-out;
+  }
+
+  .mobile-sidebar.open {
+    transform: translateX(0);
+  }
+
+  /* Ensure proper spacing for mobile header */
+  .mobile-header {
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+  }
+
+  /* Better mobile user icon styling */
+  .mobile-user-icon {
+    width: 2rem;
+    height: 2rem;
+    min-width: 2rem;
+    min-height: 2rem;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+  }
+  
+  /* Ensure perfect circle for user avatar */
+  .user-avatar {
+    border-radius: 50% !important;
+    aspect-ratio: 1 / 1;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    overflow: hidden !important;
+    flex-shrink: 0 !important;
+  }
+  
+  /* Force circular shape for any button with user-avatar class */
+  .user-avatar.rounded-full,
+  .user-avatar[class*="rounded-full"] {
+    border-radius: 50% !important;
+    border: none !important;
+    outline: none !important;
+    box-sizing: border-box !important;
+  }
+  
+  /* Ensure all header icon buttons are perfectly circular */
+  button[class*="rounded-full"]:not(.user-avatar) {
+    border-radius: 50% !important;
+    aspect-ratio: 1 / 1;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    overflow: hidden !important;
+    flex-shrink: 0 !important;
+  }
+
+  /* Mobile content area adjustments */
+  .mobile-content {
+    padding: 0.75rem;
+    overflow-x: hidden;
+  }
+
+  /* Hide desktop-only elements on mobile */
+  .desktop-only {
+    display: none !important;
+  }
+
+  /* Show mobile-specific elements */
+  .mobile-only {
+    display: block !important;
+  }
+
+  /* Improve mobile dropdown positioning */
+  .mobile-dropdown {
+    position: absolute;
+    right: 0;
+    top: 100%;
+    margin-top: 0.5rem;
+    z-index: 60;
+  }
+
+  /* Better mobile menu button */
+  .mobile-menu-btn {
+    padding: 0.5rem;
+    margin-right: 0.5rem;
+  }
+
+  /* Mobile sidebar overlay */
+  .mobile-sidebar-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 40;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
+  }
+
+  .mobile-sidebar-overlay.show {
+    opacity: 1;
+    visibility: visible;
+  }
+}
+
+/* Dark mode improvements */
+@media (prefers-color-scheme: dark) {
+  :root {
+    color-scheme: dark;
+  }
+  
+  .enhanced-button:hover {
+    box-shadow: 0 10px 25px rgba(96, 165, 250, 0.4);
+  }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .login-container {
+    border: 2px solid currentColor;
+  }
+  
+  .animate-float {
+    opacity: 0.3 !important;
+  }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  
+  .animate-float {
+    animation: none !important;
+  }
+  
+  .enhanced-button {
+    transform: none !important;
+  }
+}
+
+/* Focus improvements for accessibility */
+.focus-visible:focus {
+  outline: 2px solid #3b82f6;
+  outline-offset: 2px;
+}
+
+/* Tamil text specific styling */
+.tamil-heading {
+  font-family: 'Noto Sans Tamil', sans-serif;
+  font-weight: 600;
+  text-rendering: optimizeLegibility;
+}
+
+.tamil-body {
+  font-family: 'Noto Sans Tamil', sans-serif;
+  font-weight: 400;
+  line-height: 1.7;
+}
+
+/* Mobile viewport fixes */
+@supports (-webkit-touch-callout: none) {
+  .min-h-screen {
+    min-height: -webkit-fill-available;
+  }
+}
+
+/* iOS specific fixes */
+@supports (-webkit-touch-callout: none) {
+  input[type="text"],
+  input[type="password"] {
+    -webkit-appearance: none;
+    border-radius: 0;
+  }
+}
+
+/* Better error message styling */
+.error-message {
+  animation: slideIn 0.3s ease-out;
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Loading state improvements */
+.loading-button {
+  position: relative;
+  pointer-events: none;
+}
+
+.loading-button::after {
+  content: '';
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  margin: auto;
+  border: 2px solid transparent;
+  border-top-color: #ffffff;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Tamil number support */
+.tamil-numerals {
+  font-feature-settings: "tnum";
+}
+
+/* Better mobile form styling */
+@media (max-width: 640px) {
+  .login-form {
+    margin: 0.5rem;
+  }
+  
+  .form-input {
+    font-size: 16px; /* Prevents zoom on iOS */
+    padding: 0.875rem 1rem;
+  }
+  
+  .submit-button {
+    padding: 1rem 1.5rem;
+    font-size: 1rem;
+  }
+  
+  /* Reduce animation complexity on mobile */
+  .enhanced-button::before {
+    display: none;
+  }
+  
+  .enhanced-button:hover {
+    transform: none;
+  }
+  
+  /* Better mobile container spacing */
+  .login-container {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+}
+
+/* Welcome message animation */
+.welcome-text {
+  animation: fadeInScale 2s ease-out;
+}
+
+/* Educational symbols entrance */
+.edu-symbol {
+  animation: fadeInScale 1.5s ease-out;
+}
+
+/* Gradient background animation */
+.animated-gradient {
+  background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+  background-size: 400% 400%;
+  animation: pulseGradient 15s ease infinite;
+}
+
+/* Subtle glow effect for important elements */
+.glow-effect {
+  box-shadow: 0 0 20px rgba(59, 130, 246, 0.2);
+  animation: buttonGlow 3s ease-in-out infinite;
+}
+
+/* Enhanced Q&A HTML Content Styling */
+.qa-content {
+  line-height: 1.7;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+}
+
+.qa-content h1,
+.qa-content h2,
+.qa-content h3,
+.qa-content h4,
+.qa-content h5,
+.qa-content h6 {
+  font-family: 'Noto Sans Tamil', 'Kailasa', 'Latha', sans-serif;
+  font-weight: 600;
+  margin: 1.5em 0 0.5em 0;
+  line-height: 1.3;
+  color: inherit;
+}
+
+.qa-content h1 { font-size: 1.5em; }
+.qa-content h2 { font-size: 1.3em; }
+.qa-content h3 { font-size: 1.1em; }
+
+.qa-content p {
+  margin: 0.75em 0;
+  line-height: 1.7;
+}
+
+.qa-content ul,
+.qa-content ol {
+  margin: 1em 0;
+  padding-left: 2em;
+}
+
+.qa-content li {
+  margin: 0.5em 0;
+  line-height: 1.6;
+}
+
+.qa-content blockquote {
+  margin: 1.5em 0;
+  padding: 1em 1.5em;
+  border-left: 4px solid #3b82f6;
+  background: rgba(59, 130, 246, 0.05);
+  border-radius: 0 8px 8px 0;
+  font-style: italic;
+}
+
+.qa-content code {
+  background: rgba(0, 0, 0, 0.05);
+  padding: 0.2em 0.4em;
+  border-radius: 4px;
+  font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+  font-size: 0.9em;
+  color: #d63384;
+}
+
+.qa-content pre {
+  background: rgba(0, 0, 0, 0.05);
+  padding: 1em;
+  border-radius: 8px;
+  overflow-x: auto;
+  margin: 1em 0;
+  border: 1px solid #e5e7eb;
+}
+
+.qa-content pre code {
+  background: none;
+  padding: 0;
+  color: #374151;
+}
+
+/* HTML Code Block Enhancement with Result Labels */
+.qa-content pre:has(code:contains("&lt;")) {
+  position: relative;
+  padding-top: 3em;
+  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+}
+
+.qa-content pre:has(code:contains("&lt;"))::before {
+  content: "HTML Code";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  background: #007bff;
+  color: white;
+  padding: 0.5em 1em;
+  font-size: 0.75em;
+  font-weight: 600;
+  border-radius: 8px 8px 0 0;
+  font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+}
+
+.qa-content pre:has(code:contains("&lt;"))::after {
+  content: "Rendered Result";
+  position: absolute;
+  top: 2em;
+  left: 0;
+  right: 0;
+  background: #28a745;
+  color: white;
+  padding: 0.3em 1em;
+  font-size: 0.7em;
+  font-weight: 500;
+  font-family: 'Noto Sans Tamil', sans-serif;
+}
+
+/* Enhanced code block with HTML detection */
+.qa-content pre.html-code {
+  position: relative;
+  padding-top: 4em;
+  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+  border: 2px solid #007bff;
+}
+
+.qa-content pre.html-code::before {
+  content: "🔧 HTML Code";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  background: linear-gradient(135deg, #007bff 0%, #0056b3 100%);
+  color: white;
+  padding: 0.7em 1em;
+  font-size: 0.8em;
+  font-weight: 700;
+  border-radius: 8px 8px 0 0;
+  font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+  box-shadow: 0 2px 4px rgba(0, 123, 255, 0.3);
+}
+
+.qa-content pre.html-code::after {
+  content: "✨ Rendered Output";
+  position: absolute;
+  top: 2.5em;
+  left: 0;
+  right: 0;
+  background: linear-gradient(135deg, #28a745 0%, #1e7e34 100%);
+  color: white;
+  padding: 0.4em 1em;
+  font-size: 0.75em;
+  font-weight: 600;
+  font-family: 'Noto Sans Tamil', sans-serif;
+  box-shadow: 0 2px 4px rgba(40, 167, 69, 0.3);
+}
+
+/* Code result preview container */
+.qa-content .html-result {
+  margin: 1em 0;
+  padding: 1.5em;
+  background: white;
+  border: 2px dashed #28a745;
+  border-radius: 8px;
+  position: relative;
+}
+
+.qa-content .html-result::before {
+  content: "🎯 Preview Result";
+  position: absolute;
+  top: -0.8em;
+  left: 1em;
+  background: #28a745;
+  color: white;
+  padding: 0.2em 0.8em;
+  font-size: 0.7em;
+  font-weight: 600;
+  border-radius: 12px;
+  font-family: 'Noto Sans Tamil', sans-serif;
+}
+
+/* Table-specific HTML code block styling */
+.qa-content pre.html-table-code {
+  position: relative;
+  padding-top: 4.5em;
+  background: linear-gradient(135deg, #fff3cd 0%, #ffeaa7 100%);
+  border: 3px solid #fd7e14;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(253, 126, 20, 0.2);
+}
+
+.qa-content pre.html-table-code::before {
+  content: "📊 Table HTML Code";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  background: linear-gradient(135deg, #fd7e14 0%, #e55100 100%);
+  color: white;
+  padding: 0.8em 1.2em;
+  font-size: 0.85em;
+  font-weight: 700;
+  border-radius: 12px 12px 0 0;
+  font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+  box-shadow: 0 3px 6px rgba(253, 126, 20, 0.4);
+}
+
+.qa-content pre.html-table-code::after {
+  content: "📋 Table Preview";
+  position: absolute;
+  top: 3em;
+  left: 0;
+  right: 0;
+  background: linear-gradient(135deg, #20c997 0%, #17a2b8 100%);
+  color: white;
+  padding: 0.5em 1.2em;
+  font-size: 0.8em;
+  font-weight: 600;
+  font-family: 'Noto Sans Tamil', sans-serif;
+  box-shadow: 0 3px 6px rgba(32, 201, 151, 0.4);
+}
+
+/* Table result preview container */
+.qa-content .table-result {
+  margin: 1.5em 0;
+  padding: 2em;
+  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+  border: 3px dashed #20c997;
+  border-radius: 12px;
+  position: relative;
+  overflow-x: auto;
+}
+
+.qa-content .table-result::before {
+  content: "📊 Live Table Preview";
+  position: absolute;
+  top: -1em;
+  left: 1.5em;
+  background: linear-gradient(135deg, #20c997 0%, #17a2b8 100%);
+  color: white;
+  padding: 0.3em 1em;
+  font-size: 0.75em;
+  font-weight: 700;
+  border-radius: 15px;
+  font-family: 'Noto Sans Tamil', sans-serif;
+  box-shadow: 0 2px 8px rgba(32, 201, 151, 0.3);
+}
+
+/* Enhanced table styling in Q&A content */
+.qa-content table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1.5em 0;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+  background: white;
+  font-family: 'Noto Sans Tamil', sans-serif;
+}
+
+.qa-content table th {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  padding: 1em;
+  text-align: left;
+  font-weight: 600;
+  font-size: 1em;
+}
+
+.qa-content table td {
+  padding: 0.875em 1em;
+  border-bottom: 1px solid #e9ecef;
+  vertical-align: top;
+}
+
+.qa-content table tr:nth-child(even) {
+  background: rgba(103, 126, 234, 0.05);
+}
+
+.qa-content table tr:hover {
+  background: rgba(103, 126, 234, 0.1);
+  transition: background-color 0.2s ease;
+}
+
+.qa-content strong {
+  font-weight: 600;
+  color: inherit;
+}
+
+.qa-content em {
+  font-style: italic;
+}
+
+.qa-content u {
+  text-decoration: underline;
+}
+
+.qa-content s {
+  text-decoration: line-through;
+}
+
+.qa-content sup {
+  font-size: 0.75em;
+  vertical-align: super;
+}
+
+.qa-content sub {
+  font-size: 0.75em;
+  vertical-align: sub;
+}
+
+.qa-content a {
+  color: #3b82f6;
+  text-decoration: underline;
+  transition: color 0.2s ease;
+}
+
+.qa-content a:hover {
+  color: #1d4ed8;
+  text-decoration: none;
+}
+
+/* Dark mode adjustments for Q&A content */
+.dark .qa-content blockquote {
+  background: rgba(59, 130, 246, 0.1);
+  border-left-color: #60a5fa;
+}
+
+.dark .qa-content code {
+  background: rgba(255, 255, 255, 0.1);
+  color: #ff79c6;
+}
+
+.dark .qa-content pre {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: #4b5563;
+}
+
+.dark .qa-content pre code {
+  color: #e5e7eb;
+}
+
+.dark .qa-content a {
+  color: #60a5fa;
+}
+
+.dark .qa-content a:hover {
+  color: #3b82f6;
+}
+
+/* Dark mode for HTML code blocks */
+.dark .qa-content pre:has(code:contains("&lt;")) {
+  background: linear-gradient(135deg, #1f2937 0%, #111827 100%);
+  border-color: #374151;
+}
+
+.dark .qa-content pre.html-code {
+  background: linear-gradient(135deg, #1f2937 0%, #111827 100%);
+  border-color: #60a5fa;
+}
+
+.dark .qa-content .html-result {
+  background: #1f2937;
+  border-color: #28a745;
+}
+
+/* Dark mode for table HTML code blocks */
+.dark .qa-content pre.html-table-code {
+  background: linear-gradient(135deg, #1f2937 0%, #111827 100%);
+  border-color: #fd7e14;
+}
+
+.dark .qa-content .table-result {
+  background: linear-gradient(135deg, #1f2937 0%, #111827 100%);
+  border-color: #20c997;
+}
+
+.dark .qa-content table {
+  background: #1f2937;
+}
+
+.dark .qa-content table th {
+  background: linear-gradient(135deg, #4c51bf 0%, #553c9a 100%);
+}
+
+.dark .qa-content table td {
+  border-bottom-color: #374151;
+  color: #e5e7eb;
+}
+
+.dark .qa-content table tr:nth-child(even) {
+  background: rgba(76, 81, 191, 0.1);
+}
+
+.dark .qa-content table tr:hover {
+  background: rgba(76, 81, 191, 0.2);
+}
+
+/* Image support in Q&A content */
+.qa-content img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+  margin: 1em 0;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+/* Table support in Q&A content - Enhanced version with Tamil support */
+/* Note: The enhanced table styling is defined above with better gradients and Tamil font support */
+
+/* Mobile responsive improvements for Q&A content */
+@media (max-width: 768px) {
+  .qa-content {
+    font-size: 0.95em;
+    line-height: 1.6;
+  }
+  
+  .qa-content h1 { font-size: 1.3em; }
+  .qa-content h2 { font-size: 1.2em; }
+  .qa-content h3 { font-size: 1.1em; }
+  
+  .qa-content ul,
+  .qa-content ol {
+    padding-left: 1.5em;
+  }
+  
+  .qa-content blockquote {
+    margin: 1em 0;
+    padding: 0.75em 1em;
+  }
+  
+  /* Mobile responsive HTML code blocks */
+  .qa-content pre:has(code:contains("&lt;")),
+  .qa-content pre.html-code {
+    padding-top: 3.5em;
+    font-size: 0.8em;
+  }
+  
+  .qa-content pre:has(code:contains("&lt;"))::before,
+  .qa-content pre.html-code::before {
+    padding: 0.4em 0.8em;
+    font-size: 0.7em;
+  }
+  
+  .qa-content pre:has(code:contains("&lt;"))::after,
+  .qa-content pre.html-code::after {
+    padding: 0.3em 0.8em;
+    font-size: 0.65em;
+  }
+  
+  .qa-content .html-result {
+    margin: 0.8em 0;
+    padding: 1em;
+  }
+  
+  /* Mobile responsive table HTML code blocks */
+  .qa-content pre.html-table-code {
+    padding-top: 4em;
+    font-size: 0.75em;
+  }
+  
+  .qa-content pre.html-table-code::before {
+    padding: 0.6em 1em;
+    font-size: 0.75em;
+  }
+  
+  .qa-content pre.html-table-code::after {
+    padding: 0.4em 1em;
+    font-size: 0.7em;
+  }
+  
+  .qa-content .table-result {
+    margin: 1em 0;
+    padding: 1.5em;
+  }
+  
+  .qa-content table {
+    font-size: 0.85em;
+  }
+  
+  .qa-content table th,
+  .qa-content table td {
+    padding: 0.6em 0.8em;
+  }
+}
+
+/* Q&A Header Enhancement Styles */
+.qa-content .qa-header-question,
+.qa-content .qa-header-answer,
+.qa-content .qa-header-html,
+.qa-content .qa-header-html-code {
+  position: relative;
+  margin: 1.5em 0 1em 0;
+  padding: 0.75em 1em;
+  border-radius: 8px;
+  font-weight: 600;
+  font-family: 'Noto Sans Tamil', sans-serif;
+}
+
+.qa-content .qa-header-question {
+  background: linear-gradient(135deg, #dc2626 0%, #b91c1c 100%);
+  color: white;
+  box-shadow: 0 4px 15px rgba(220, 38, 38, 0.3);
+}
+
+.qa-content .qa-header-answer {
+  background: linear-gradient(135deg, #16a34a 0%, #15803d 100%);
+  color: white;
+  box-shadow: 0 4px 15px rgba(22, 163, 74, 0.3);
+}
+
+.qa-content .qa-header-html {
+  background: linear-gradient(135deg, #7c3aed 0%, #6d28d9 100%);
+  color: white;
+  box-shadow: 0 4px 15px rgba(124, 58, 237, 0.3);
+}
+
+.qa-content .qa-header-html-code {
+  background: linear-gradient(135deg, #ea580c 0%, #c2410c 100%);
+  color: white;
+  box-shadow: 0 4px 15px rgba(234, 88, 12, 0.3);
+}
+
+.qa-content .qa-html-badge {
+  display: inline-block;
+  margin-left: 0.5em;
+  padding: 0.2em 0.6em;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 12px;
+  font-size: 0.8em;
+  font-weight: 500;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+/* Dark mode for Q&A headers */
+.dark .qa-content .qa-header-question {
+  background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+}
+
+.dark .qa-content .qa-header-answer {
+  background: linear-gradient(135deg, #22c55e 0%, #16a34a 100%);
+}
+
+.dark .qa-content .qa-header-html {
+  background: linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%);
+}
+
+.dark .qa-content .qa-header-html-code {
+  background: linear-gradient(135deg, #f97316 0%, #ea580c 100%);
+}
+
+/* Mobile responsive for Q&A headers */
+@media (max-width: 768px) {
+  .qa-content .qa-header-question,
+  .qa-content .qa-header-answer,
+  .qa-content .qa-header-html,
+  .qa-content .qa-header-html-code {
+    padding: 0.6em 0.8em;
+    font-size: 0.9em;
+  }
+  
+  .qa-content .qa-html-badge {
+    font-size: 0.7em;
+    padding: 0.1em 0.4em;
+  }
+}

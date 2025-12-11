@@ -1,0 +1,5 @@
+{
+  "name": "My Class Content Browser",
+  "description": "An interactive web application for browsing and managing educational content. It features a hierarchical navigation system, content filtering by resource type, and a clear, responsive layout for an efficient user experience.",
+  "requestFramePermissions": []
+}

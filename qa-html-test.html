@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="ta">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Q&A HTML Support Test</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Tamil:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Noto Sans Tamil', sans-serif;
+            line-height: 1.7;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        .qa-card {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            margin: 20px 0;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+        .qa-content {
+            line-height: 1.7;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+        }
+        .qa-content h1, .qa-content h2, .qa-content h3 {
+            font-family: 'Noto Sans Tamil', sans-serif;
+            font-weight: 600;
+            margin: 1.5em 0 0.5em 0;
+            line-height: 1.3;
+        }
+        .qa-content h1 { font-size: 1.5em; }
+        .qa-content h2 { font-size: 1.3em; }
+        .qa-content h3 { font-size: 1.1em; }
+        .qa-content p { margin: 0.75em 0; }
+        .qa-content ul, .qa-content ol { margin: 1em 0; padding-left: 2em; }
+        .qa-content li { margin: 0.5em 0; line-height: 1.6; }
+        .qa-content blockquote {
+            margin: 1.5em 0;
+            padding: 1em 1.5em;
+            border-left: 4px solid #3b82f6;
+            background: rgba(59, 130, 246, 0.05);
+            border-radius: 0 8px 8px 0;
+            font-style: italic;
+        }
+        .qa-content code {
+            background: rgba(0, 0, 0, 0.05);
+            padding: 0.2em 0.4em;
+            border-radius: 4px;
+            font-family: monospace;
+            font-size: 0.9em;
+        }
+        .qa-content strong { font-weight: 600; }
+        .qa-content em { font-style: italic; }
+        .qa-content a {
+            color: #3b82f6;
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <h1>Q&A HTML Support Test - Tamil & English Content</h1>
+    
+    <div class="qa-card">
+        <h2>Sample Question 1: Basic Tamil Content</h2>
+        <div class="qa-content">
+            <h3>கேள்வி:</h3>
+            <p>தமிழ் இலக்கியத்தில் சிற்பம் என்பதன் அர்த்தம் என்ன?</p>
+            
+            <h3>விளக்கம்:</h3>
+            <p>தமிழ் இலக்கியத்தில் <strong>சிற்பம்</strong> என்பது கவிதை அல்லது இலக்கியப் படைப்பின் ஒரு சிறிய அங்கமாகும். இது பொதுவாக:</p>
+            <ul>
+                <li>குறுகிய மற்றும் நடைமுறையான கருத்துக்களைக் கொண்டிருக்கும்</li>
+                <li>எளிதாக படிக்கக் கூடிய அமைப்பில் இருக்கும்</li>
+                <li>அறிவுரை அல்லது வழிகாட்டுதல்களை வழங்கும்</li>
+            </ul>
+            
+            <blockquote>
+                "சிற்பம் என்பது இலக்கியத்தின் ஆன்மாவைச் சுருக்கமாக வெளிப்படுத்தும் கலை."
+            </blockquote>
+            
+            <p><em>உதாரணம்:</em> <code>வாழ்க தமிழ் வளர்க தமிழர்</code> - இது ஒரு சிறிய சிற்பம்.</p>
+        </div>
+    </div>
+    
+    <div class="qa-card">
+        <h2>Sample Question 2: HTML Code Support with Result Labels</h2>
+        <div class="qa-content">
+            <h3>Question:</h3>
+            <p>How can HTML code be displayed with result labels in Q&A content?</p>
+            
+            <h3>Answer:</h3>
+            <p>HTML code blocks can now be displayed with special formatting and result labels:</p>
+            
+            <pre><code>&lt;h2 style="color: #3b82f6; text-align: center;"&gt;தமிழ் இலக்கியம்&lt;/h2&gt;
+&lt;p&gt;இது ஒரு எடுத்துக்காட்டு தலைப்பு&lt;/p&gt;</code></pre>
+            
+            <p>When HTML code is detected, the system automatically adds:</p>
+            <ul>
+                <li><strong>"🔧 HTML Code" label</strong> at the top</li>
+                <li><strong>"✨ Rendered Output" label</strong> showing the result area</li>
+                <li><strong>Colored borders and background</strong> for visual distinction</li>
+                <li><strong>Enhanced typography</strong> for better code readability</li>
+            </ul>
+            
+            <h3>Tamil HTML Example:</h3>
+            <pre><code>&lt;div class="tamil-text"&gt;
+  &lt;h1&gt;கவிதை&lt;/h1&gt;
+  &lt;p&gt;மலரும் மணம் நறுமணம்&lt;/p&gt;
+&lt;/div&gt;</code></pre>
+            
+            <blockquote>
+                "Enhanced HTML support makes educational content more interactive and visually appealing for learners."
+            </blockquote>
+        </div>
+    </div>
+    
+    <div class="qa-card">
+        <h2>Sample Question 3: Complex Formatting</h2>
+        <div class="qa-content">
+            <h3>கேள்வி:</h3>
+            <p>கணிதத்தில் <strong>Pythagorean theorem</strong> எப்படி பயன்படுகிறது?</p>
+            
+            <h3>விளக்கம்:</h3>
+            <p>பித்தகோரியன் தேற்றம்:</p>
+            <div style="background: #f0f9ff; padding: 15px; border-radius: 8px; margin: 15px 0;">
+                <p style="text-align: center; font-size: 1.2em; margin: 0;">
+                    <strong>a² + b² = c²</strong>
+                </p>
+                <p style="margin: 10px 0 0 0; font-style: italic;">
+                    where c is the hypotenuse and a, b are the other two sides
+                </p>
+            </div>
+            
+            <h3>உதாரணங்கள்:</h3>
+            <ul>
+                <li>3-4-5 triangle: <code>3² + 4² = 5²</code></li>
+                <li>5-12-13 triangle: <code>5² + 12² = 13²</code></li>
+                <li>8-15-17 triangle: <code>8² + 15² = 17²</code></li>
+            </ul>
+            
+            <p><strong>முடிவுரை:</strong> இந்த தேற்றம் <em>அறிவியல்</em> மற்றும் <em>பொறியியல்</em> துறைகளில் மிகவும் முக்கியத்துவம் வாய்ந்தது.</p>
+        </div>
+    </div>
+    
+    <div class="qa-card">
+        <h2>Sample Question 3: Interactive HTML Examples</h2>
+        <div class="qa-content">
+            <h3>Question:</h3>
+            <p>Create an interactive Tamil greeting card using HTML</p>
+            
+            <h3>Answer:</h3>
+            <p>Here's how to create an interactive greeting card:</p>
+            
+            <pre><code>&lt;div class="greeting-card" style="
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    padding: 2em;
+    border-radius: 15px;
+    color: white;
+    text-align: center;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+"&gt;
+  &lt;h1 style="margin-bottom: 1em;"&gt;வணக்கம்!&lt;/h1&gt;
+  &lt;p style="font-size: 1.2em;"&gt;நல்வரவு&lt;/p&gt;
+  &lt;p&gt;Welcome to Tamil Learning&lt;/p&gt;
+&lt;/div&gt;</code></pre>
+            
+            <h3>Features Added:</h3>
+            <ul>
+                <li>Gradient background with beautiful colors</li>
+                <li>Rounded corners for modern look</li>
+                <li>Center-aligned text</li>
+                <li>Drop shadow for depth</li>
+                <li>Responsive design</li>
+            </ul>
+            
+            <div class="html-result">
+                <h1 style="margin-bottom: 1em; font-family: 'Noto Sans Tamil', sans-serif;">வணக்கம்!</h1>
+                <p style="font-size: 1.2em;">நல்வரவு</p>
+                <p>Welcome to Tamil Learning</p>
+            </div>
+            
+            <h3>Table HTML Example:</h3>
+            <pre><code>&lt;table style="width: 100%; border-collapse: collapse; margin: 1em 0;"&gt;
+  &lt;tr&gt;
+    &lt;th style="background: #667eea; color: white; padding: 1em;"&gt;பழமொழி&lt;/th&gt;
+    &lt;th style="background: #667eea; color: white; padding: 1em;"&gt;விளக்கம்&lt;/th&gt;
+    &lt;th style="background: #667eea; color: white; padding: 1em;"&gt;எடுத்துக்காட்டு&lt;/th&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td&gt;பாகவதர்&lt;/td&gt;
+    &lt;td&gt;பாகவதரின் வீட்டிற்கு வரும் ஒரு பாத்திரம்&lt;/td&gt;
+    &lt;td&gt;வீட்டிற்கு வருகை&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td&gt;முக்கிய பாத்திரம்&lt;/td&gt;
+    &lt;td&gt;நாடகத்தின் மையக்கருத்தை விளக்கும் பாத்திரம்&lt;/td&gt;
+    &lt;td&gt;மையக்கருத்து&lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/table&gt;</code></pre>
+            
+            <div class="table-result">
+                <table style="width: 100%; border-collapse: collapse; margin: 1em 0; font-family: 'Noto Sans Tamil', sans-serif;">
+                    <tr>
+                        <th style="background: #667eea; color: white; padding: 1em; text-align: left;">பழமொழி</th>
+                        <th style="background: #667eea; color: white; padding: 1em; text-align: left;">விளக்கம்</th>
+                        <th style="background: #667eea; color: white; padding: 1em; text-align: left;">எடுத்துக்காட்டு</th>
+                    </tr>
+                    <tr style="background: rgba(103, 126, 234, 0.05);">
+                        <td style="padding: 0.875em 1em; border-bottom: 1px solid #e9ecef;">பாகவதர்</td>
+                        <td style="padding: 0.875em 1em; border-bottom: 1px solid #e9ecef;">பாகவதரின் வீட்டிற்கு வரும் ஒரு பாத்திரம்</td>
+                        <td style="padding: 0.875em 1em; border-bottom: 1px solid #e9ecef;">வீட்டிற்கு வருகை</td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 0.875em 1em; border-bottom: 1px solid #e9ecef;">முக்கிய பாத்திரம்</td>
+                        <td style="padding: 0.875em 1em; border-bottom: 1px solid #e9ecef;">நாடகத்தின் மையக்கருத்தை விளக்கும் பாத்திரம்</td>
+                        <td style="padding: 0.875em 1em; border-bottom: 1px solid #e9ecef;">மையக்கருத்து</td>
+                    </tr>
+                </table>
+            </div>
+            
+            <h3>CSS Enhancement:</h3>
+            <pre><code>.greeting-card {
+  font-family: 'Noto Sans Tamil', sans-serif;
+  transition: transform 0.3s ease;
+}
+
+.greeting-card:hover {
+  transform: scale(1.05);
+}</code></pre>
+        </div>
+    </div>
+    
+    <div class="qa-card">
+        <h2>Sample Question 4: HTML Labels in Q&A Sections</h2>
+        <div class="qa-content">
+            <h3 class="qa-header-question">கேள்வி: HTML Code with Labels</h3>
+            <p>How do HTML labels work in Q&A section headers?</p>
+            
+            <h3 class="qa-header-answer">விளக்கம்: HTML Enhanced Labels</h3>
+            <p>HTML code in Q&A labels now supports special formatting:</p>
+            
+            <h3 class="qa-header-html-code">💻 HTML Code Example <span class="qa-html-badge">Live Code</span></h3>
+            <pre><code>&lt;h3 class="qa-header-question"&gt;கேள்வி: Enhanced Question&lt;/h3&gt;
+&lt;p&gt;This is an enhanced question with HTML code support.&lt;/p&gt;
+
+&lt;h3 class="qa-header-answer"&gt;விளக்கம்: Enhanced Answer&lt;/h3&gt;
+&lt;p&gt;This is an enhanced answer with proper styling.&lt;/p&gt;</code></pre>
+            
+            <h3 class="qa-header-html">🎨 Visual Enhancement Features</h3>
+            <p>The Q&A header enhancement system provides:</p>
+            <ul>
+                <li><strong>Red gradient headers</strong> for questions with Tamil support</li>
+                <li><strong>Green gradient headers</strong> for answers with proper styling</li>
+                <li><strong>Purple gradient headers</strong> for HTML content sections</li>
+                <li><strong>Orange gradient headers</strong> for HTML code sections with badges</li>
+                <li><strong>Responsive design</strong> that works on all devices</li>
+            </ul>
+            
+            <h3 class="qa-header-html-code">📋 Complete Example <span class="qa-html-badge">Full Implementation</span></h3>
+            <pre><code>&lt;div class="qa-content"&gt;
+  &lt;h3 class="qa-header-question"&gt;கேள்வி: HTML Support&lt;/h3&gt;
+  &lt;p&gt;Enhanced Q&amp;A with HTML labels&lt;/p&gt;
+  
+  &lt;h3 class="qa-header-answer"&gt;விளக்கம்: Complete Support&lt;/h3&gt;
+  &lt;p&gt;All labels support HTML code formatting&lt;/p&gt;
+&lt;/div&gt;</code></pre>
+            
+            <div class="html-result">
+                <h3 style="background: linear-gradient(135deg, #dc2626 0%, #b91c1c 100%); color: white; margin: 1.5em 0 1em 0; padding: 0.75em 1em; border-radius: 8px; font-weight: 600; font-family: 'Noto Sans Tamil', sans-serif;">கேள்வி: HTML Support</h3>
+                <p>Enhanced Q&A with HTML labels</p>
+                
+                <h3 style="background: linear-gradient(135deg, #16a34a 0%, #15803d 100%); color: white; margin: 1.5em 0 1em 0; padding: 0.75em 1em; border-radius: 8px; font-weight: 600; font-family: 'Noto Sans Tamil', sans-serif;">விளக்கம்: Complete Support</h3>
+                <p>All labels support HTML code formatting</p>
+            </div>
+            
+            <blockquote>
+                "Enhanced HTML label support makes Q&A sections more visually appealing and informative for learners."
+            </blockquote>
+        </div>
+    </div>
+</body>
+</html>

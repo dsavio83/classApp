@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>API Test</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background: #f5f5f5;
+        }
+        .test-section {
+            margin: 20px 0;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            background: white;
+        }
+        .result {
+            margin: 10px 0;
+            padding: 10px;
+            border-radius: 3px;
+            font-family: monospace;
+        }
+        .success { background: #d4edda; color: #155724; }
+        .error { background: #f8d7da; color: #721c24; }
+        .info { background: #d1ecf1; color: #0c5460; }
+        button {
+            padding: 8px 16px;
+            margin: 5px;
+            background: #007bff;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button:hover { background: #0056b3; }
+        input, select {
+            padding: 8px;
+            margin: 5px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+    <h1>PDF API Test</h1>
+    
+    <div class="test-section">
+        <h3>Test 1: Check API Server Status</h3>
+        <button onclick="testApiStatus()">Test API Status</button>
+        <div id="api-status"></div>
+    </div>
+
+    <div class="test-section">
+        <h3>Test 2: Test File Access</h3>
+        <input type="text" id="fileId" placeholder="Enter Content ID or File ID" value="test">
+        <button onclick="testFileAccess()">Test File Access</button>
+        <div id="file-access"></div>
+    </div>
+
+    <div class="test-section">
+        <h3>Test 3: Direct PDF URL Test</h3>
+        <select id="pdfUrl">
+            <option value="/api/content/test/file">Content API (test)</option>
+            <option value="/api/files/test.pdf">File API (test.pdf)</option>
+            <option value="/uploads/Class 8/tamilat/Unit1/Slides/compressedpdf.pdf">Direct Path</option>
+        </select>
+        <button onclick="testDirectPdf()">Test Direct PDF</button>
+        <div id="direct-pdf"></div>
+    </div>
+
+    <div class="test-section">
+        <h3>Test 4: PDF.js Worker Test</h3>
+        <button onclick="testPdfWorker()">Test PDF.js Worker</button>
+        <div id="pdf-worker"></div>
+    </div>
+
+    <div class="test-section">
+        <h3>Console Output</h3>
+        <div id="console-output" style="background: #f8f8f8; padding: 10px; border-radius: 5px; font-family: monospace; max-height: 300px; overflow-y: auto;"></div>
+        <button onclick="clearConsole()">Clear Console</button>
+    </div>
+
+    <script>
+        const consoleOutput = document.getElementById('console-output');
+
+        function log(message, type = 'info') {
+            const timestamp = new Date().toLocaleTimeString();
+            const logEntry = document.createElement('div');
+            logEntry.className = `result ${type}`;
+            logEntry.textContent = `[${timestamp}] ${message}`;
+            consoleOutput.appendChild(logEntry);
+            consoleOutput.scrollTop = consoleOutput.scrollHeight;
+            console.log(`[API Test] ${message}`);
+        }
+
+        function clearConsole() {
+            consoleOutput.innerHTML = '';
+        }
+
+        async function testApiStatus() {
+            const statusDiv = document.getElementById('api-status');
+            statusDiv.innerHTML = 'Testing...';
+            
+            try {
+                const response = await fetch('/api/content');
+                log(`API Status: ${response.status} ${response.statusText}`, response.ok ? 'success' : 'error');
+                statusDiv.innerHTML = `<div class="result ${response.ok ? 'success' : 'error'}">API is ${response.ok ? 'working' : 'not working'} (${response.status})</div>`;
+            } catch (error) {
+                log(`API Error: ${error.message}`, 'error');
+                statusDiv.innerHTML = `<div class="result error">API Error: ${error.message}</div>`;
+            }
+        }
+
+        async function testFileAccess() {
+            const fileId = document.getElementById('fileId').value;
+            const accessDiv = document.getElementById('file-access');
+            accessDiv.innerHTML = 'Testing...';
+            
+            try {
+                // Test the FileUploadHelper logic
+                let testUrl = null;
+                if (fileId.startsWith('content_')) {
+                    const contentId = fileId.replace('content_', '');
+                    testUrl = `/api/content/${contentId}/file`;
+                } else if (fileId.match(/^[0-9a-fA-F]{24}$/)) {
+                    testUrl = `/api/content/${fileId}/file`;
+                } else {
+                    testUrl = `/api/files/${fileId}`;
+                }
+                
+                log(`Generated URL: ${testUrl}`, 'info');
+                
+                // Test if URL is accessible
+                const response = await fetch(testUrl, { method: 'HEAD' });
+                log(`URL Test: ${response.status} ${response.statusText}`, response.ok ? 'success' : 'error');
+                
+                accessDiv.innerHTML = `
+                    <div class="result ${response.ok ? 'success' : 'error'}">
+                        Generated URL: ${testUrl}<br>
+                        Status: ${response.status} ${response.statusText}
+                    </div>
+                `;
+            } catch (error) {
+                log(`File Access Error: ${error.message}`, 'error');
+                accessDiv.innerHTML = `<div class="result error">Error: ${error.message}</div>`;
+            }
+        }
+
+        async function testDirectPdf() {
+            const pdfUrl = document.getElementById('pdfUrl').value;
+            const pdfDiv = document.getElementById('direct-pdf');
+            pdfDiv.innerHTML = 'Testing...';
+            
+            try {
+                log(`Testing PDF URL: ${pdfUrl}`, 'info');
+                const response = await fetch(pdfUrl, { method: 'HEAD' });
+                log(`PDF URL Test: ${response.status} ${response.statusText}`, response.ok ? 'success' : 'error');
+                
+                pdfDiv.innerHTML = `
+                    <div class="result ${response.ok ? 'success' : 'error'}">
+                        URL: ${pdfUrl}<br>
+                        Status: ${response.status} ${response.statusText}<br>
+                        ${response.ok ? '<a href="' + pdfUrl + '" target="_blank">Open in new tab</a>' : ''}
+                    </div>
+                `;
+            } catch (error) {
+                log(`Direct PDF Error: ${error.message}`, 'error');
+                pdfDiv.innerHTML = `<div class="result error">Error: ${error.message}</div>`;
+            }
+        }
+
+        async function testPdfWorker() {
+            const workerDiv = document.getElementById('pdf-worker');
+            workerDiv.innerHTML = 'Loading PDF.js...';
+            
+            try {
+                log('Testing PDF.js worker...', 'info');
+                
+                // Dynamic import
+                const pdfjs = await import('pdfjs-dist');
+                log(`PDF.js version: ${pdfjs.version}`, 'success');
+                
+                // Test worker configuration
+                const CDN_WORKER_URL = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/5.4.394/pdf.worker.min.js';
+                const LOCAL_WORKER_URL = '/pdf.worker.min.js';
+                
+                // Test local worker
+                try {
+                    const localResponse = await fetch(LOCAL_WORKER_URL, { method: 'HEAD' });
+                    log(`Local worker: ${localResponse.ok ? 'available' : 'not available'} (${localResponse.status})`, localResponse.ok ? 'success' : 'error');
+                } catch (e) {
+                    log(`Local worker test failed: ${e.message}`, 'error');
+                }
+                
+                // Test CDN worker
+                try {
+                    const cdnResponse = await fetch(CDN_WORKER_URL, { method: 'HEAD' });
+                    log(`CDN worker: ${cdnResponse.ok ? 'available' : 'not available'} (${cdnResponse.status})`, cdnResponse.ok ? 'success' : 'error');
+                } catch (e) {
+                    log(`CDN worker test failed: ${e.message}`, 'error');
+                }
+                
+                workerDiv.innerHTML = `
+                    <div class="result success">
+                        PDF.js ${pdfjs.version} loaded successfully<br>
+                        Check console for worker availability tests
+                    </div>
+                `;
+            } catch (error) {
+                log(`PDF.js Error: ${error.message}`, 'error');
+                workerDiv.innerHTML = `<div class="result error">Error: ${error.message}</div>`;
+            }
+        }
+
+        // Auto-run basic tests
+        window.addEventListener('load', () => {
+            log('API Test page loaded', 'info');
+            testApiStatus();
+        });
+    </script>
+</body>
+</html>

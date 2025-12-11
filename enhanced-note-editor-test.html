@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="ta">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enhanced Note Editor - Test</title>
+    <script>
+        // This script is placed in the head to prevent a flash of unstyled content (FOUC).
+        if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.classList.add('dark')
+        } else {
+            document.documentElement.classList.remove('dark')
+        }
+    </script>
+    
+    <!-- Quill.js CSS -->
+    <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
+    
+    <!-- Main Tailwind CSS script -->
+    <script src="https://cdn.tailwindcss.com?plugins=typography"></script>
+    
+    <!-- Tailwind CSS Configuration -->
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    animation: {
+                        'fade-in': 'fadeIn 0.3s ease-out',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        .ql-toolbar {
+            border-top-left-radius: 0.5rem;
+            border-top-right-radius: 0.5rem;
+        }
+        .ql-container {
+            border-bottom-left-radius: 0.5rem;
+            border-bottom-right-radius: 0.5rem;
+        }
+    </style>
+</head>
+<body class="bg-gray-50 dark:bg-gray-900 text-gray-800 dark:text-gray-200">
+    <div class="container mx-auto p-6">
+        <h1 class="text-3xl font-bold mb-6 text-center">Enhanced Text Editor with Table & Alignment Features</h1>
+        <p class="text-lg mb-4 text-center">New features added:</p>
+        <ul class="text-center mb-8 space-y-2">
+            <li class="inline-block bg-blue-100 dark:bg-blue-900 px-3 py-1 rounded-md mr-2 mb-2">📊 Insert Table</li>
+            <li class="inline-block bg-green-100 dark:bg-green-900 px-3 py-1 rounded-md mr-2 mb-2">↔️ Text Alignment (Left, Center, Right, Justify)</li>
+            <li class="inline-block bg-purple-100 dark:bg-purple-900 px-3 py-1 rounded-md mr-2 mb-2">📝 Enhanced Formula Support</li>
+        </ul>
+        
+        <div class="max-w-4xl mx-auto">
+            <div class="bg-white dark:bg-gray-800 rounded-lg shadow-md">
+                <!-- Toolbar -->
+                <div class="toolbar border border-gray-300 dark:border-gray-600 rounded-t-lg bg-gray-50 dark:bg-gray-700 p-1">
+                    <span class="ql-formats">
+                        <select class="ql-header">
+                            <option value=""></option>
+                            <option value="1">Heading 1</option>
+                            <option value="2">Heading 2</option>
+                            <option value="3">Heading 3</option>
+                        </select>
+                    </span>
+                    <span class="ql-formats">
+                        <button class="ql-bold"></button>
+                        <button class="ql-italic"></button>
+                        <button class="ql-underline"></button>
+                    </span>
+                    <span class="ql-formats">
+                        <select class="ql-align" defaultValue="">
+                            <option value="">Left</option>
+                            <option value="center">Center</option>
+                            <option value="right">Right</option>
+                            <option value="justify">Justify</option>
+                        </select>
+                    </span>
+                    <span class="ql-formats">
+                        <select class="ql-color"></select>
+                        <select class="ql-background"></select>
+                    </span>
+                    <span class="ql-formats">
+                        <button class="ql-list" value="ordered"></button>
+                        <button class="ql-list" value="bullet"></button>
+                        <button class="ql-blockquote"></button>
+                    </span>
+                    <span class="ql-formats">
+                        <button class="ql-table" title="Insert Table">
+                            <svg viewBox="0 0 18 18" style="width: 18px; height: 18px;">
+                                <rect class="ql-stroke" height="7" rx="1" ry="1" width="2" x="2" y="2"></rect>
+                                <rect class="ql-stroke" height="7" rx="1" ry="1" width="2" x="8" y="2"></rect>
+                                <path class="ql-fill" d="M2,9h6v7H2Z"></path>
+                                <path class="ql-fill" d="M8,9h8v7H8Z"></path>
+                            </svg>
+                        </button>
+                    </span>
+                    <span class="ql-formats">
+                        <button class="ql-link"></button>
+                        <button class="ql-image"></button>
+                        <button class="ql-video"></button>
+                    </span>
+                    <span class="ql-formats">
+                        <button class="ql-formula-custom" type="button" title="Insert Formula (LaTeX)">
+                             <svg viewBox="0 0 18 18" style="width: 18px; height: 18px;">
+                                <text x="2" y="14" style="font-family: monospace, sans-serif; font-size: 14px;">ƒx</text>
+                            </svg>
+                        </button>
+                    </span>
+                    <span class="ql-formats">
+                        <button class="ql-clean"></button>
+                    </span>
+                </div>
+                <!-- Editor -->
+                <div id="editor" class="editor h-96 border-l border-r border-b border-gray-300 dark:border-gray-600 rounded-b-lg"></div>
+            </div>
+            
+            <div class="mt-6 p-4 bg-yellow-50 dark:bg-yellow-900 rounded-lg">
+                <h3 class="font-semibold mb-2">Instructions / வழிமுறைகள்:</h3>
+                <ul class="space-y-1 text-sm">
+                    <li><strong>Table Feature:</strong> Click the table icon to insert a 3x3 table</li>
+                    <li><strong>Alignment:</strong> Use the alignment dropdown to change text alignment</li>
+                    <li><strong>Formula:</strong> Click the ƒx button to insert LaTeX formulas</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
+    <script>
+        // Initialize Quill editor
+        const quill = new Quill('#editor', {
+            theme: 'snow',
+            modules: {
+                toolbar: {
+                    container: '.toolbar',
+                    handlers: {
+                        'formula-custom': function() {
+                            const formula = prompt('Enter your LaTeX formula (without delimiters):');
+                            if (formula) {
+                                const range = this.quill.getSelection(true);
+                                this.quill.insertText(range.index, `$$${formula}$$`, 'user');
+                            }
+                        },
+                        'table': function() {
+                            // Create basic table structure manually
+                            const range = this.quill.getSelection(true);
+                            const tableHTML = `
+                                <table style="border-collapse: collapse; width: 100%; margin: 10px 0;">
+                                    <thead>
+                                        <tr>
+                                            <th style="border: 1px solid #ddd; padding: 8px; background-color: #f2f2f2;">Header 1</th>
+                                            <th style="border: 1px solid #ddd; padding: 8px; background-color: #f2f2f2;">Header 2</th>
+                                            <th style="border: 1px solid #ddd; padding: 8px; background-color: #f2f2f2;">Header 3</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td style="border: 1px solid #ddd; padding: 8px;">Cell 1</td>
+                                            <td style="border: 1px solid #ddd; padding: 8px;">Cell 2</td>
+                                            <td style="border: 1px solid #ddd; padding: 8px;">Cell 3</td>
+                                        </tr>
+                                        <tr>
+                                            <td style="border: 1px solid #ddd; padding: 8px;">Cell 4</td>
+                                            <td style="border: 1px solid #ddd; padding: 8px;">Cell 5</td>
+                                            <td style="border: 1px solid #ddd; padding: 8px;">Cell 6</td>
+                                        </tr>
+                                        <tr>
+                                            <td style="border: 1px solid #ddd; padding: 8px;">Cell 7</td>
+                                            <td style="border: 1px solid #ddd; padding: 8px;">Cell 8</td>
+                                            <td style="border: 1px solid #ddd; padding: 8px;">Cell 9</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            `;
+                            this.quill.clipboard.dangerouslyPasteHTML(range.index, tableHTML);
+                        }
+                    }
+                }
+            },
+            placeholder: 'Start writing your notes here...',
+        });
+
+        // Save content function
+        function saveContent() {
+            const content = quill.root.innerHTML;
+            console.log('Saved content:', content);
+            alert('Content saved! Check console for details.');
+        }
+
+        // Add save button functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            // Create save button
+            const saveBtn = document.createElement('button');
+            saveBtn.textContent = 'Save Content';
+            saveBtn.className = 'mt-4 px-6 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700';
+            saveBtn.onclick = saveContent;
+            
+            const container = document.querySelector('.max-w-4xl');
+            container.appendChild(saveBtn);
+        });
+    </script>
+</body>
+</html>
